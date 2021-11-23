@@ -1,0 +1,51 @@
+{
+	"folders": {},
+	"connections": {
+		"mysql8-17d4ceda49d-39fca216982cd38e": {
+			"provider": "mysql",
+			"driver": "mysql8",
+			"name": "MySQL@Accpetance",
+			"save-password": true,
+			"show-system-objects": true,
+			"read-only": true,
+			"configuration": {
+				"host": "mysql",
+				"port": "3306",
+				"database": "exo",
+				"url": "jdbc:mysql://mysql:3306/exo",
+				"type": "dev",
+				"properties": {
+				  "allowPublicKeyRetrieval": "true" 
+				},
+				"auth-model": "native"
+			}
+		},
+		"postgres-jdbc-17d4cedffbc-7d53fd1e34ea814d": {
+			"provider": "postgresql",
+			"driver": "postgres-jdbc",
+			"name": "PostgreSQL@Acceptance",
+			"save-password": true,
+			"show-system-objects": true,
+			"read-only": true,
+			"configuration": {
+				"host": "postgres",
+				"port": "5432",
+				"database": "exo",
+				"url": "jdbc:postgresql://postgres:5432/exo",
+				"type": "dev",
+				"auth-model": "native"
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
+}

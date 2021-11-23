@@ -1,0 +1,22 @@
+!SESSION 2021-11-23 13:10:19.982 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.12
+java.vendor=Eclipse Foundation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en
+Framework arguments:  -product io.cloudbeaver.product.ce.product -web-config conf/cloudbeaver.conf -registryMultiLanguage
+Command-line arguments:  -product io.cloudbeaver.product.ce.product -web-config conf/cloudbeaver.conf -registryMultiLanguage
+
+!ENTRY org.jkiss.dbeaver.model 1 0 2021-11-23 13:10:20.979
+!MESSAGE Initialize web platform...
+
+!ENTRY org.jkiss.dbeaver.model 1 0 2021-11-23 13:10:21.299
+!MESSAGE Available drivers: ClickHouse,DB2 LUW,Firebird,H2 Embedded,Derby Server,Trino,MS SQL Server / SQL Server,MySQL,MariaDB,Oracle,PostgreSQL,SQLite
+
+!ENTRY org.jkiss.dbeaver.model 1 0 2021-11-23 13:10:21.305
+!MESSAGE Web platform initialized (326ms)
+
+!ENTRY org.jkiss.dbeaver.model 1 0 2021-11-23 13:10:21.622
+!MESSAGE No auto configuration was found. Server must be configured manually
+
+!ENTRY org.jkiss.dbeaver.model 1 0 2021-11-23 13:13:29.849
+!MESSAGE Configure CB database security
