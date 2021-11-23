@@ -1,0 +1,36 @@
+{
+	"folders": {},
+	"connections": {
+		"mysql8-17d3d65e701-654a977624140ef1": {
+			"provider": "mysql",
+			"driver": "mysql8",
+			"name": "MySQL@Hosting",
+			"description": "eXo Hosting",
+			"save-password": false,
+			"show-system-objects": true,
+			"read-only": true,
+			"configuration": {
+				"host": "mysql",
+				"port": "3306",
+				"database": "exo",
+				"url": "jdbc:mysql://mysql:3306/exo",
+				"type": "dev",
+				"properties": {
+					"allowPublicKeyRetrieval": "true"
+				},
+				"auth-model": "native"
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
+}
