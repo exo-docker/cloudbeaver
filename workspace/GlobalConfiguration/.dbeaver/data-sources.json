@@ -1,7 +1,7 @@
 {
 	"folders": {},
 	"connections": {
-		"mysql8-17d4ceda49d-39fca216982cd38e": {
+		"mysql8-18823545840-4c316f51e9ff0ee": {
 			"provider": "mysql",
 			"driver": "mysql8",
 			"name": "MySQL@Accpetance",
@@ -13,6 +13,7 @@
 				"port": "3306",
 				"database": "exo",
 				"url": "jdbc:mysql://mysql:3306/exo",
+				"configurationType": "MANUAL",
 				"type": "dev",
 				"properties": {
 				  "allowPublicKeyRetrieval": "true" 
@@ -20,7 +21,7 @@
 				"auth-model": "native"
 			}
 		},
-		"postgres-jdbc-17d4cedffbc-7d53fd1e34ea814d": {
+		"postgres-jdbc-1882354e194-49822a460cd9ce75": {
 			"provider": "postgresql",
 			"driver": "postgres-jdbc",
 			"name": "PostgreSQL@Acceptance",
@@ -32,6 +33,7 @@
 				"port": "5432",
 				"database": "exo",
 				"url": "jdbc:postgresql://postgres:5432/exo",
+				"configurationType": "MANUAL",
 				"type": "dev",
 				"auth-model": "native"
 			}
