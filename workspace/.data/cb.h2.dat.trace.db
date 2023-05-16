@@ -1,3 +1,0 @@
-2021-11-20 12:45:36 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CB_SERVER" not found; SQL statement:
-SELECT * FROM CB_SERVER [42102-199]
