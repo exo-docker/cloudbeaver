@@ -28,13 +28,13 @@ jobs:
             echo "Error: Could not get latest tag of ${{ env.BASE_IMAGE }} image! Abort!"
             exit 1
           fi
-          sed -Ei "s|FROM dbeaver/cloudbeaver.*|FROM dbeaver/cloudbeaver:${latestTag}${{ matrix.tagSuffix }}|g" Dockerfile && git add Dockerfile
+          sed -Ei "s|FROM dbeaver/cloudbeaver.*|FROM dbeaver/cloudbeaver:${latestTag}|g" Dockerfile && git add Dockerfile
           if git diff-index --quiet HEAD; then
             echo "Nothing to commit!"
           else
             git config --global user.email "exo-swf@exoplatform.com"
             git config --global user.name "exo-swf"
-            git commit -m "Bump cloudbeaver version to ${latestTag}${{ matrix.tagSuffix }}"
+            git commit -m "Bump cloudbeaver version to ${latestTag}"
             git tag ${latestTag}${{ matrix.tagSuffix }} -m "Release ${latestTag}${{ matrix.tagSuffix }}"
             git push origin HEAD ${latestTag}${{ matrix.tagSuffix }}
           fi
