@@ -13,9 +13,9 @@ jobs:
       uses: actions/checkout@v3
     - name: Update image base
       run: |
-        latestTag=$(curl -fsSL "https://hub.docker.com/v2/repositories/${BASE_IMAGE}/tags/?page_size=1000" | jq -r '.results | .[] | .name' | grep -P '^[0-9]+\.[0-9]+\.[0-9]+$' | head -1)
+        latestTag=$(curl -fsSL "https://hub.docker.com/v2/repositories/${{ env.BASE_IMAGE }}/tags/?page_size=1000" | jq -r '.results | .[] | .name' | grep -P '^[0-9]+\.[0-9]+\.[0-9]+$' | head -1)
         if [ -z "${latestTag}" ]; then
-          echo "Error: Could not get latest tag of ${BASE_IMAGE} image! Abort!"
+          echo "Error: Could not get latest tag of ${{ env.BASE_IMAGE }} image! Abort!"
           exit 1
         fi
         sed -Ei "s|FROM dbeaver/cloudbeaver.*|FROM dbeaver/cloudbeaver:${latestTag}|g" Dockerfile && git add Dockerfile
