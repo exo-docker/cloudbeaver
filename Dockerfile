@@ -1,4 +1,4 @@
-FROM dbeaver/cloudbeaver:24.0.2
+FROM dbeaver/cloudbeaver:24.0.3
 
 COPY ${PWD}/workspace /opt/cloudbeaver/workspace
 
