@@ -11,7 +11,7 @@ WORKDIR /opt/cloudbeaver
 # RUN chown -R dbeaver:dbeaver /opt/cloudbeaver/workspace
 
 # Use exec form for ENTRYPOINT for signal forwarding and better PID 1 behavior
-ENTRYPOINT ["./run-server.sh"]
+ENTRYPOINT ["./launch-product.sh"]
 
 # Add a health check to verify the server is running
 HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
