@@ -42,6 +42,7 @@ jobs:
     - uses: exo-actions/buildDockerImage-action@v1
       with:
         dockerImage: "exoplatform/cloudbeaver"
+        platforms: "linux/arm64,linux/amd64"
         dockerImageTag: ${{ needs.parse-docker-build-env.outputs.buildTags }}
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
