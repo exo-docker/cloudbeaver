@@ -1,5 +1,5 @@
 # Use official CloudBeaver image
-FROM dbeaver/cloudbeaver:26.1.0
+FROM dbeaver/cloudbeaver:26.1.1
 
 # Copy pre-defined workspace configuration
 COPY workspace /opt/cloudbeaver/workspace
