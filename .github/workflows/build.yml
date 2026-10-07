@@ -8,21 +8,13 @@ env:
 jobs:
   trigger-build:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - ref: master
-            tagSuffix: ""
-          - ref: acceptance
-            tagSuffix: -acc
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
-          ref: ${{ matrix.ref }}
+          ref: master
           token: ${{ secrets.SWF_TOKEN }}
-      - name: Update image base for ${{ matrix.ref }} branch
+      - name: Update image base
         run: |
           latestTag=$(curl -fsSL "https://hub.docker.com/v2/repositories/${{ env.BASE_IMAGE }}/tags/?page_size=1000" | jq -r '.results | .[] | .name' | grep -P '^26\.[0-9]\.[0-9]+$' | head -1)
           if [ -z "${latestTag}" ]; then
@@ -36,6 +28,7 @@ jobs:
             git config --global user.email "exo-swf@exoplatform.com"
             git config --global user.name "exo-swf"
             git commit -m "Bump cloudbeaver version to ${latestTag}"
-            git tag ${latestTag}${{ matrix.tagSuffix }} -m "Release ${latestTag}${{ matrix.tagSuffix }}"
-            git push origin HEAD ${latestTag}${{ matrix.tagSuffix }}
+            # -0 is our revision of the image for this upstream version
+            git tag ${latestTag}-0 -m "Release ${latestTag}-0"
+            git push origin HEAD ${latestTag}-0
           fi

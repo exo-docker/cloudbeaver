@@ -1,0 +1,18 @@
+name: Test image
+
+on:
+  pull_request:
+  workflow_call:
+
+jobs:
+  smoke-test:
+    name: "Smoke test"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Check the upstream cloudbeaver.conf we derive ours from did not change
+        run: tests/check-upstream-conf.sh
+      - name: Build the image
+        run: docker build -t cloudbeaver-under-test .
+      - name: Smoke test (LDAP login, admin group binding, no anonymous or local access)
+        run: tests/smoke.sh cloudbeaver-under-test
