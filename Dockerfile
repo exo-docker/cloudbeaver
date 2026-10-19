@@ -1,4 +1,4 @@
-FROM dbeaver/cloudbeaver:26.2.2
+FROM dbeaver/cloudbeaver:26.2.3
 
 COPY conf/ /opt/cloudbeaver/conf/
 COPY entrypoint.sh /opt/cloudbeaver/entrypoint.sh
