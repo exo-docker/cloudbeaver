@@ -15,6 +15,7 @@ Set `CLOUDBEAVER_APP_GRANT_CONNECTIONS_ACCESS_TO_ANONYMOUS_TEAM=true` so every l
 | `CLOUDBEAVER_LDAP_BASE_DN` | Search base, must also contain the groups |
 | `CLOUDBEAVER_LDAP_BIND_USER`, `_BIND_PASSWORD` | Service account used to search users and groups |
 | `CLOUDBEAVER_LDAP_LOGIN_ATTR` | Attribute users log in with (e.g. `uid`) |
+| `CLOUDBEAVER_LDAP_FIRST_NAME_ATTR`, `_LAST_NAME_ATTR` | Attributes holding the first and last name (default `givenName` / `sn`), saved at first login. Needs CloudBeaver 26.2.5 or later, ignored before |
 | `CLOUDBEAVER_LDAP_ADMIN_GROUP` | Full DN of the LDAP group that gets the Admin team |
 | `CLOUDBEAVER_AI_CHAT_DISABLED` | Disable the AI assistant |
 
