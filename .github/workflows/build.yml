@@ -13,22 +13,30 @@ jobs:
         uses: actions/checkout@v7
         with:
           ref: master
+          fetch-depth: 0 # tags are needed to compute the image revision
           token: ${{ secrets.SWF_TOKEN }}
       - name: Update image base
         run: |
-          latestTag=$(curl -fsSL "https://hub.docker.com/v2/repositories/${{ env.BASE_IMAGE }}/tags/?page_size=1000" | jq -r '.results | .[] | .name' | grep -P '^26\.[0-9]\.[0-9]+$' | head -1)
+          # Upstream tags are 26.x.y or 26.x.y.z (hotfix). Take the highest by version order, not the API order.
+          latestTag=$(curl -fsSL "https://hub.docker.com/v2/repositories/${{ env.BASE_IMAGE }}/tags/?page_size=1000" | jq -r '.results | .[] | .name' | grep -P '^26\.[0-9]+\.[0-9]+(\.[0-9]+)?$' | sort -V | tail -1)
           if [ -z "${latestTag}" ]; then
             echo "Error: Could not get latest tag of ${{ env.BASE_IMAGE }} image! Abort!"
             exit 1
           fi
-          sed -Ei "s|FROM dbeaver/cloudbeaver.*|FROM dbeaver/cloudbeaver:${latestTag}|g" Dockerfile && git add Dockerfile
-          if git diff-index --quiet HEAD; then
-            echo "Nothing to commit!"
-          else
-            git config --global user.email "exo-swf@exoplatform.com"
-            git config --global user.name "exo-swf"
-            git commit -m "Bump cloudbeaver version to ${latestTag}"
-            # -0 is our revision of the image for this upstream version
-            git tag ${latestTag}-0 -m "Release ${latestTag}-0"
-            git push origin HEAD ${latestTag}-0
+          currentTag=$(sed -nE 's|^FROM dbeaver/cloudbeaver:(.*)$|\1|p' Dockerfile)
+          # Never go back to an older base (e.g. a hotfix tag is newer than the plain release it is based on)
+          if [ "$(printf '%s\n%s\n' "${currentTag}" "${latestTag}" | sort -V | tail -1)" = "${currentTag}" ]; then
+            echo "Base ${currentTag} is already the latest (upstream: ${latestTag}), nothing to do!"
+            exit 0
           fi
+          # Our image tag is <x.y.z>-<revision>: the revision counts the images already released for that x.y.z
+          upstream=$(echo "${latestTag}" | cut -d. -f1-3)
+          lastRevision=$(git tag -l "${upstream}-*" | sed -E "s|^${upstream}-||" | sort -n | tail -1)
+          revision=$(( ${lastRevision:--1} + 1 ))
+          imageTag="${upstream}-${revision}"
+          sed -Ei "s|^FROM dbeaver/cloudbeaver.*|FROM dbeaver/cloudbeaver:${latestTag}|" Dockerfile && git add Dockerfile
+          git config --global user.email "exo-swf@exoplatform.com"
+          git config --global user.name "exo-swf"
+          git commit -m "Bump cloudbeaver version to ${latestTag}"
+          git tag "${imageTag}" -m "Release ${imageTag}"
+          git push origin HEAD "${imageTag}"
